@@ -1,0 +1,40 @@
+import time
+
+def sleep_calculator(hours, minutes):
+  """Calculates the time after sleeping for the given hours and minutes.
+
+  Args:
+    hours: The number of hours to sleep.
+    minutes: The number of minutes to sleep.
+
+  Returns:
+    A string representing the time after sleeping.
+  """
+
+  # Calculate total minutes of sleep
+  total_minutes = hours * 60 + minutes
+
+  # Get current time
+  current_time = time.localtime()
+
+  # Calculate the new hour and minute after sleeping
+  new_hour = current_time.tm_hour + (current_time.tm_min + total_minutes) // 60
+  new_minute = (current_time.tm_min + total_minutes) % 60
+
+  # Adjust hour if it exceeds 23
+  new_hour %= 24
+
+  # Format the time string
+  new_time = f"{new_hour:02}:{new_minute:02}"
+
+  return new_time
+
+# Get input from the user
+hours = int(input("Enter the number of hours to sleep: "))
+minutes = int(input("Enter the number of minutes to sleep: "))
+
+# Calculate the time after sleeping
+wake_up_time = sleep_calculator(hours, minutes)
+
+# Print the wake-up time
+print(f"You will wake up at {wake_up_time}")
